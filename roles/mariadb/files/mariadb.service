@@ -1,0 +1,11 @@
+[Unit]
+Description=mariadb service
+Wants=syslog.service
+[Service]
+User=ubuntu
+Group=ubuntu
+Restart=always
+ExecStart=/usr/bin/podman start -a mariadb
+ExecStop=/usr/bin/podman stop -t 10 mariadb
+[Install]
+WantedBy=default.target
