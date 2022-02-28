@@ -1,0 +1,14 @@
+
+- hosts: dbserver1
+  gather_facts: no
+  become: yes
+  pre_tasks:
+  - name: change subuid and subgid
+    copy:
+      content: "ubuntu:100000:65536"
+      dest: "{{ item }}"
+    with_items:
+      - /etc/subuid
+      - /etc/subgid
+  roles:
+    - mariadb
